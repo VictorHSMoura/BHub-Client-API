@@ -1,2 +1,33 @@
 # BHub-Client-API
 API desenvolvida para a seleção de candidatos da empresa BHub.
+
+## Requisitos
+
+- [Python](https://www.python.org/downloads/) (3.8.10 ou mais novo)
+- [Pip](https://pip.pypa.io/en/stable/installation/) (20.0.2 ou mais novo)
+
+## Execução
+
+Antes de executar a API, é necessário conferir se o seu computador possui os requisitos necessários. Após isso, é necessário instalar os pacotes requeridos pelo projeto. Para isso, execute o comando abaixo na pasta raíz do projeto:
+
+```
+  pip install -r requirements.txt
+```
+
+Após instalar os pacotes, basta executar a API por meio do seguinte comando (também executado na pasta raíz do projeto):
+
+```
+  uvicorn app:app --reload
+```
+
+Com isso, o acesso a API podera ser feito por `localhost:8000`.
+
+**OBS.:** Caso algum dos comandos não funcione, teste utilizar o prefixo `python3 -m ` antes do comando apresentado.
+
+## Testes
+
+Os testes dessa aplicação foram feitos utilizando a biblioteca pytest. Para executar os testes basta executar a seguinte linha na raíz do projeto:
+
+```
+  pytest
+```

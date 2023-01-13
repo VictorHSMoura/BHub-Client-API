@@ -1,5 +1,5 @@
 from datetime import datetime, date
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel, validator
 
 from models.api.bank import Bank
@@ -10,7 +10,7 @@ class Client(BaseModel):
     address: str
     register_date: date
     declared_billing: float
-    bank_details: List[Bank]
+    bank_details: Optional[List[Bank]]
 
 
     @validator('register_date', pre=True)

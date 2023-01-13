@@ -4,7 +4,7 @@ from datetime import date
 
 def test_create_client_without_bank_details():
     """
-    Tests the creation of a new client without bank details
+    Tests the creation of a new client without bank details.
     """
     client = Client(
         corporate_name="ABC Atacarejo",
@@ -22,7 +22,7 @@ def test_create_client_without_bank_details():
 
 def test_create_client_with_bank_details():
     """
-    Tests the creation of a new client without bank details
+    Tests the creation of a new client without bank details.
     """
     client = Client(
         corporate_name="ABC Atacarejo",

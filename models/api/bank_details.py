@@ -16,3 +16,6 @@ class BankDetails(BaseModel):
         if not account_number.isdigit():
             raise ValueError('Account number must contain only digits')
         return account_number
+
+    class Config:
+        orm_mode = True

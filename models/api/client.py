@@ -24,3 +24,6 @@ class Client(BaseModel):
         if not phone_number.isdigit():
             raise ValueError('Phone number must contain only digits')
         return phone_number
+
+    class Config:
+        orm_mode = True

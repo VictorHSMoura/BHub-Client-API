@@ -63,7 +63,7 @@ def update_client(db: Session, client_id: int,
     Update client parameters on DB and returns new client. If it doesn't
     exist, returns None.
     """
-    # Retrieve 
+    # Retrieve client from DB
     db_client: ClientDBModel = db.query(ClientDBModel).filter(
         ClientDBModel.id == client_id).first()
     if db_client is None:
@@ -78,3 +78,22 @@ def update_client(db: Session, client_id: int,
     # Add client to database and return created model.
     db.commit()
     return ClientAPIModel.from_orm(db_client)
+
+
+def delete_client(db: Session, client_id: int) -> bool:
+    """ 
+    Delete client with specified id from DB and returns deleted client.
+    If it doesn't exist, returns None.
+    """
+    # Retrieve client from DB
+    db_client: ClientDBModel = db.query(ClientDBModel).filter(
+        ClientDBModel.id == client_id).first()
+    if db_client is None:
+        return False
+
+    # Delete first the bank details, and then the client from the database.
+    [db.delete(bank_details) for bank_details in db_client.bank_details]
+    db.delete(db_client)
+    db.commit()
+    
+    return True

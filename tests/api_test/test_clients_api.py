@@ -106,6 +106,12 @@ def test_update_client_with_invalid_parameter(client: TestClient):
 
     assert response.status_code == 400
 
+def test_update_unexistent_client(client: TestClient):   
+    response = client.put("/clients/1", json=default_client())
+
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Client not found."}
+
 def test_update_id_not_possible(client: TestClient):
     client.post("/clients", json=default_client())
 

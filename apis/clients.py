@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
 from typing import List
-from models.api import Client as ClientModel, Bank as BankModel
+from models.api import ClientAPIModel
 import db.clients as db
 
 router = APIRouter(
@@ -11,14 +11,14 @@ router = APIRouter(
 )
 
 
-@router.get("/", response_model=List[ClientModel])
+@router.get("/", response_model=List[ClientAPIModel])
 async def get_users():
     """ Returns a list with all registered clients. """
     clients = db.return_all_clients()
     return clients
 
 
-@router.get("/{client_id}", response_model=ClientModel)
+@router.get("/{client_id}", response_model=ClientAPIModel)
 async def get_users_with_id(client_id: int):
     """ Returns a client with the specified id. """
     client = db.return_client_with_specified_id(client_id=client_id)

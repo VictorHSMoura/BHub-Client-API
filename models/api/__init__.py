@@ -1,2 +1,2 @@
-from .client import Client
-from .bank import Bank
+from .client import Client as ClientAPIModel
+from .bank_details import BankDetails as BankDetailsAPIModel

@@ -1,6 +1,6 @@
 from pydantic import BaseModel, validator
 
-class Bank(BaseModel):
+class BankDetails(BaseModel):
     branch: str
     account: str
     bank_name: str

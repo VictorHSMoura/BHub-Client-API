@@ -2,7 +2,7 @@ from datetime import datetime, date
 from typing import List, Optional
 from pydantic import BaseModel, validator
 
-from models.api.bank import Bank
+from models.api.bank_details import BankDetails
 
 class Client(BaseModel):
     corporate_name: str
@@ -10,7 +10,7 @@ class Client(BaseModel):
     address: str
     register_date: date
     declared_billing: float
-    bank_details: Optional[List[Bank]]
+    bank_details: Optional[List[BankDetails]]
 
 
     @validator('register_date', pre=True)

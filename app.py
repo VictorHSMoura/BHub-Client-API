@@ -2,6 +2,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from apis.clients import router as clients_router
+from db.sqlalchemy_db import Base, engine
+
+Base.metadata.create_all(bind=engine)
 
 # Creates API app.
 app = FastAPI(

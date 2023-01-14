@@ -1,4 +1,4 @@
-from models.api import Client as ClientAPIModel, Bank as BankAPIModel
+from models.api import ClientAPIModel, BankDetailsAPIModel
 from typing import List, Optional
 
 default_client = ClientAPIModel(
@@ -8,7 +8,7 @@ default_client = ClientAPIModel(
     register_date="28/09/2020",
     declared_billing=15000,
     bank_details=[
-        BankAPIModel(
+        BankDetailsAPIModel(
             branch="34103",
             account="27423610",
             bank_name="Caixa Econômica Federal"

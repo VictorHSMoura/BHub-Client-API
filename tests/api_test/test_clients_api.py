@@ -45,7 +45,9 @@ def test_get_clients_without_insertion(client: TestClient):
 
 
 def test_get_clients_after_insertion(client: TestClient):
-    client.post("/clients", json=default_client())
+    response = client.post("/clients", json=default_client())
+    assert response.status_code == 201
+
     response = client.get("/clients")
 
     assert response.status_code == 200
@@ -82,7 +84,8 @@ def test_update_client(client: TestClient):
     updated_client = default_client()
     updated_client["declared_billing"] = 20000.00
     
-    client.put("/clients/1", json=updated_client)
+    response = client.put("/clients/1", json=updated_client)
+    assert response.status_code == 200
 
     response = client.get("/clients/1")
 
@@ -115,3 +118,24 @@ def test_update_id_not_possible(client: TestClient):
 
     assert response.status_code == 200
     assert response.json() == default_response()
+
+def test_delete_client(client: TestClient):
+    client.post("/clients", json=default_client())
+
+    response = client.delete("clients/1")
+    assert response.status_code == 200
+
+    response = client.get("/clients/1")
+
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Client not found."}
+
+
+def test_delete_unexistent_client(client: TestClient):
+    response = client.delete("clients/1")
+    assert response.status_code == 404
+
+    response = client.get("/clients/1")
+
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Client not found."}

@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 
 from typing import List
 from models.api import Client as ClientModel, Bank as BankModel
+import db.clients as db
 
 router = APIRouter(
     prefix="/clients",
@@ -10,25 +11,17 @@ router = APIRouter(
 )
 
 
-# Returns all users
-@router.get("/")
-async def get_users() -> List[ClientModel]:
-    try:
-        default_user = ClientModel(
-            corporate_name="ABC Atacarejo",
-            phone="3138642736",
-            address="Rua 12, Lagoinha, Belo Horizonte",
-            register_date="28/09/2020",
-            declared_billing=15000,
-            bank_details=[
-                BankModel(
-                    branch="34103",
-                    account="27423610",
-                    bank_name="Caixa Econômica Federal"
-                )
-            ]
-        )
-    except ValueError as error:
-        raise HTTPException(status_code=400, detail=f"Bad Request: {repr(error)}")
+@router.get("/", response_model=List[ClientModel])
+async def get_users():
+    """ Returns a list with all registered clients. """
+    clients = db.return_all_clients()
+    return clients
 
-    return [default_user]
+
+@router.get("/{client_id}", response_model=ClientModel)
+async def get_users_with_id(client_id: int):
+    """ Returns a client with the specified id. """
+    client = db.return_client_with_specified_id(client_id=client_id)
+    if client is None:
+        raise HTTPException(404, detail="Client not found.")
+    return client

@@ -37,5 +37,16 @@ def creates_new_client(client: ClientAPIModel,
     """ Creates a client with specified parameters. """
     client = db.create_client(db=db_instance, client=client)
     if client is None:
-        raise HTTPException(500, detail="Fail on client creation.")
+        raise HTTPException(500, detail="Unexpected error on client creation.")
+    return client
+
+
+@router.put("/{client_id}", response_model=ClientAPIModel)
+def creates_new_client(client_id: int, client: ClientAPIModel,
+                       db_instance: Session = Depends(get_db_instance)):
+    """ Updates a client with specified parameters. """
+    client = db.update_client(db=db_instance, client_id=client_id,
+                              client=client)
+    if client is None:
+        raise HTTPException(500, detail="Unexpected error on client update.")
     return client

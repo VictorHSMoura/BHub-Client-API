@@ -1,6 +1,8 @@
 from pydantic import BaseModel, validator
+from typing import Optional
 
 class BankDetails(BaseModel):
+    id: Optional[int]
     branch: str
     account: str
     bank_name: str

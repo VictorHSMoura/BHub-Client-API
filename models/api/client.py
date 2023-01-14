@@ -6,6 +6,7 @@ from models.api.bank_details import BankDetails
 
 
 class Client(BaseModel):
+    id: Optional[int]
     corporate_name: str
     phone: str
     address: str

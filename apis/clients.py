@@ -52,7 +52,7 @@ def update_client(client_id: int, client: ClientAPIModel,
     client = db.update_client(db=db_instance, client_id=client_id,
                               client=client)
     if client is None:
-        raise HTTPException(500, detail="Unexpected error on client update.")
+        raise HTTPException(404, detail="Client not found.")
     return client
 
 

@@ -3,21 +3,6 @@ from models.db import ClientDBModel, BankDetailsDBModel
 from typing import List, Optional
 from sqlalchemy.orm import Session
 
-default_client = ClientAPIModel(
-    corporate_name="ABC Atacarejo",
-    phone="3138642736",
-    address="Rua 12, Lagoinha, Belo Horizonte",
-    register_date="28/09/2020",
-    declared_billing=15000,
-    bank_details=[
-        BankDetailsAPIModel(
-            branch="34103",
-            account="27423610",
-            bank_name="Caixa Econômica Federal"
-        )
-    ]
-)
-
 
 def return_all_clients(db: Session) -> List[ClientAPIModel]:
     """ Returns all clients from DB. """
@@ -95,5 +80,5 @@ def delete_client(db: Session, client_id: int) -> bool:
     [db.delete(bank_details) for bank_details in db_client.bank_details]
     db.delete(db_client)
     db.commit()
-    
+
     return True

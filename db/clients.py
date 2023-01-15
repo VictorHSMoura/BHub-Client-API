@@ -1,4 +1,4 @@
-from apis.models import ClientAPIModel, BankDetailsAPIModel
+from apis.models import ClientAPIModel
 from db.models import ClientDBModel, BankDetailsDBModel
 from typing import List, Optional
 from sqlalchemy.orm import Session
@@ -24,8 +24,7 @@ def return_client_with_specified_id(
 def create_client(db: Session,
                   client: ClientAPIModel) -> Optional[ClientAPIModel]:
     """ 
-    Search client with specified id on DB and returns it. If it doesn't
-    exist, returns None.
+    Create client with specified parameters on DB and returns created client.
     """
     # Extract bank details from user.
     db_bank_details = [BankDetailsDBModel(

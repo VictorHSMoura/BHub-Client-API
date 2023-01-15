@@ -1,4 +1,3 @@
-import pytest
 from sqlalchemy.orm import Session
 
 from db.clients import *

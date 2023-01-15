@@ -116,5 +116,5 @@ def test_delete_client(dbsession: Session):
 
 
 def test_delete_unexistent_client(dbsession: Session):
-    client = delete_client(db=dbsession, client_id=1)
-    assert client == False
+    is_delete_successful = delete_client(db=dbsession, client_id=1)
+    assert is_delete_successful == False

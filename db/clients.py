@@ -66,8 +66,8 @@ def update_client(db: Session, client_id: int,
 
 def delete_client(db: Session, client_id: int) -> bool:
     """ 
-    Delete client with specified id from DB and returns deleted client.
-    If it doesn't exist, returns None.
+    Delete client with specified id from DB and returns if deletion was
+    successful. If it doesn't exist, returns False.
     """
     # Retrieve client from DB
     db_client: ClientDBModel = db.query(ClientDBModel).filter(

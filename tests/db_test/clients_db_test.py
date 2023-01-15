@@ -98,6 +98,9 @@ def test_update_id_not_possible(dbsession: Session):
     client = return_client_with_specified_id(db=dbsession, client_id=1)
     assert client == default_response()
 
+    client = return_client_with_specified_id(db=dbsession, client_id=2)
+    assert client == None
+
 
 def test_delete_client(dbsession: Session):
     create_client(db=dbsession, client=default_client())

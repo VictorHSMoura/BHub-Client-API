@@ -43,3 +43,25 @@ def create_bank_details(db: Session, bank_details: BankDetailsAPIModel,
     db.add(db_bank_details)
     db.commit()
     return BankDetailsAPIModel.from_orm(db_bank_details)
+
+
+def update_bank_details(
+        db: Session, bank_id: int,
+        bank_details: BankDetailsAPIModel) -> Optional[BankDetailsAPIModel]:
+    """ 
+    Update client parameters on DB and returns new client. If it doesn't
+    exist, returns None.
+    """
+    # Retrieve client from DB
+    db_bank_details: BankDetailsDBModel = db.query(BankDetailsDBModel).filter(
+        BankDetailsDBModel.id == bank_id).first()
+    if db_bank_details is None:
+        return None
+
+    db_bank_details.account = bank_details.account
+    db_bank_details.bank_name = bank_details.bank_name
+    db_bank_details.branch = bank_details.branch
+
+    # Add client to database and return created model.
+    db.commit()
+    return BankDetailsAPIModel.from_orm(db_bank_details)

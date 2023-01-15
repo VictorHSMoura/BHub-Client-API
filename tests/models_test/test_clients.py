@@ -1,5 +1,5 @@
 import pytest
-from models.api.client import Client
+from apis.models.client import Client
 from datetime import date
 
 def test_create_client_without_bank_details():

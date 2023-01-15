@@ -2,7 +2,7 @@ from datetime import datetime, date
 from typing import List, Optional
 from pydantic import BaseModel, validator
 
-from models.api.bank_details import BankDetails
+from apis.models.bank_details import BankDetails
 
 
 class Client(BaseModel):

@@ -1,5 +1,5 @@
 import pytest
-from models.api.bank_details import BankDetails
+from apis.models.bank_details import BankDetails
 from datetime import date
 
 def test_create_bank():

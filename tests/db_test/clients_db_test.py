@@ -2,7 +2,7 @@ import pytest
 from sqlalchemy.orm import Session
 
 from db.clients import *
-from models.api import ClientAPIModel, BankDetailsAPIModel
+from apis.models import ClientAPIModel, BankDetailsAPIModel
 
 
 def default_client():

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, status
-from models.api import ClientAPIModel
+from apis.models import ClientAPIModel
 from typing import List
 
 from sqlalchemy.orm import Session

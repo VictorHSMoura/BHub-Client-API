@@ -1,5 +1,5 @@
-from models.api import ClientAPIModel, BankDetailsAPIModel
-from models.db import ClientDBModel, BankDetailsDBModel
+from apis.models import ClientAPIModel, BankDetailsAPIModel
+from db.models import ClientDBModel, BankDetailsDBModel
 from typing import List, Optional
 from sqlalchemy.orm import Session
 

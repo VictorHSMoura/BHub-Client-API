@@ -88,10 +88,89 @@ def test_get_bank_details_with_unexistent_id(client: TestClient,
     assert response.json() == {"detail": "Bank details not found."}
 
 
-def test_add_invalid_bank_details(client: TestClient):
+def test_add_invalid_bank_details(client: TestClient, default_client: None):
     invalid_bank_details = default_bank_details()
     invalid_bank_details["account"] = "3652-0"
 
     response = client.post("/bank_details/client/1", json=invalid_bank_details)
 
     assert response.status_code == 400
+
+
+def test_update_bank_details(client: TestClient, default_client: None):
+    client.post("/bank_details/client/1", json=default_bank_details())
+
+    updated_bank_details = default_bank_details()
+    updated_bank_details["bank_name"] = "Itaú Unibanco"
+
+    response = client.put("/bank_details/1", json=updated_bank_details)
+    assert response.status_code == 200
+
+    response = client.get("/bank_details/1")
+
+    updated_response = default_response()
+    updated_response["bank_name"] = "Itaú Unibanco"
+
+    assert response.status_code == 200
+    assert response.json() == updated_response
+
+
+def test_update_bank_details_with_invalid_parameter(client: TestClient,
+                                                    default_client: None):
+    client.post("/bank_details/client/1", json=default_bank_details())
+
+    updated_bank_details = default_bank_details()
+    updated_bank_details["branch"] = "765213-0"
+
+    response = client.put("/bank_details/1", json=updated_bank_details)
+
+    assert response.status_code == 400
+
+
+def test_update_unexistent_bank_details(client: TestClient, default_client: None):
+    response = client.put("/bank_details/1", json=default_bank_details())
+
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Bank details not found."}
+
+
+def test_update_id_not_possible(client: TestClient, default_client: None):
+    client.post("/bank_details/client/1", json=default_bank_details())
+
+    updated_bank_details = default_bank_details()
+    updated_bank_details["id"] = 2
+
+    client.put("/bank_details/1", json=updated_bank_details)
+
+    response = client.get("/bank_details/1")
+
+    assert response.status_code == 200
+    assert response.json() == default_response()
+
+    response = client.get("/bank_details/2")
+
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Bank details not found."}
+
+
+def test_delete_bank_details(client: TestClient, default_client: None):
+    client.post("/bank_details/client/1", json=default_bank_details())
+
+    response = client.delete("/bank_details/1")
+    assert response.status_code == 200
+
+    response = client.get("/bank_details/1")
+
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Bank details not found."}
+
+
+def test_delete_unexistent_bank_details(client: TestClient,
+                                        default_client: None):
+    response = client.delete("/bank_details/1")
+    assert response.status_code == 404
+
+    response = client.get("/bank_details/1")
+
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Bank details not found."}

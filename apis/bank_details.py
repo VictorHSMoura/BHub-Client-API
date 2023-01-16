@@ -26,11 +26,11 @@ def get_bank_details(db_instance: Session = Depends(get_db_instance)):
 def get_bank_details_with_id(bank_details_id: int,
                              db_instance: Session = Depends(get_db_instance)):
     """ Returns a bank details with the specified id. """
-    client = db.return_bank_details_with_specified_id(
+    bank_details = db.return_bank_details_with_specified_id(
         db=db_instance, bank_id=bank_details_id)
-    if client is None:
+    if bank_details is None:
         raise HTTPException(404, detail="Bank details not found.")
-    return client
+    return bank_details
 
 
 @router.get("/client/{client_id}", response_model=List[BankDetailsAPIModel],
@@ -55,3 +55,27 @@ def creates_new_bank_details(bank_details: BankDetailsAPIModel,
         raise HTTPException(
             500, detail="Unexpected error on bank details creation.")
     return bank_details
+
+
+@router.put("/{bank_details_id}", response_model=BankDetailsAPIModel,
+            status_code=status.HTTP_200_OK)
+def update_bank_details(bank_details_id: int, bank_details: BankDetailsAPIModel,
+                        db_instance: Session = Depends(get_db_instance)):
+    """ Updates a bank details with specified parameters. """
+    bank_details = db.update_bank_details(
+        db=db_instance, bank_id=bank_details_id, bank_details=bank_details)
+    if bank_details is None:
+        raise HTTPException(404, detail="Bank details not found.")
+    return bank_details
+
+
+@router.delete("/{bank_details_id}", status_code=status.HTTP_200_OK)
+def delete_bank_details(bank_details_id: int,
+                        db_instance: Session = Depends(get_db_instance)):
+    """ Deletes a bank details with specified ID. """
+    is_delete_successfull = db.delete_bank_details(db=db_instance,
+                                                   bank_id=bank_details_id)
+    if not is_delete_successfull:
+        raise HTTPException(404, detail="Bank details not found.")
+
+    return {}

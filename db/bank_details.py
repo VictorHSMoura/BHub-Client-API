@@ -1,17 +1,17 @@
 from apis.models import BankDetailsAPIModel
 from db.models import ClientDBModel, BankDetailsDBModel
-from typing import List, Optional
+from typing import Optional
 from sqlalchemy.orm import Session
 
 
-def return_all_bank_details(db: Session) -> List[BankDetailsAPIModel]:
+def return_all_bank_details(db: Session) -> list[BankDetailsAPIModel]:
     """ Returns all bank details from DB. """
     bank_details = db.query(BankDetailsDBModel).all()
     return [BankDetailsAPIModel.from_orm(bank) for bank in bank_details]
 
 
 def return_all_bank_details_for_client(
-        db: Session, client_id: int) -> List[BankDetailsAPIModel]:
+        db: Session, client_id: int) -> list[BankDetailsAPIModel]:
     """ Returns all bank details for a specific client. """
     bank_details = db.query(BankDetailsDBModel).filter(
         BankDetailsDBModel.client_id == client_id).all()

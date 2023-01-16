@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from apis.models import ClientAPIModel
-from typing import List
 
 from sqlalchemy.orm import Session
 import db.clients as db
@@ -13,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.get("/", response_model=List[ClientAPIModel],
+@router.get("/", response_model=list[ClientAPIModel],
             status_code=status.HTTP_200_OK)
 def get_clients(db_instance: Session = Depends(get_db_instance)):
     """ Returns a list with all registered clients. """

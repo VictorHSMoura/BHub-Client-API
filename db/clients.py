@@ -1,10 +1,10 @@
 from apis.models import ClientAPIModel
 from db.models import ClientDBModel, BankDetailsDBModel
-from typing import List, Optional
+from typing import Optional
 from sqlalchemy.orm import Session
 
 
-def return_all_clients(db: Session) -> List[ClientAPIModel]:
+def return_all_clients(db: Session) -> list[ClientAPIModel]:
     """ Returns all clients from DB. """
     clients = db.query(ClientDBModel).all()
     return [ClientAPIModel.from_orm(client) for client in clients]

@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from apis.models import BankDetailsAPIModel
-from typing import List
 
 from sqlalchemy.orm import Session
 import db.bank_details as db
@@ -13,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.get("/", response_model=List[BankDetailsAPIModel],
+@router.get("/", response_model=list[BankDetailsAPIModel],
             status_code=status.HTTP_200_OK)
 def get_bank_details(db_instance: Session = Depends(get_db_instance)):
     """ Returns a list with all registered bank details. """
@@ -33,7 +32,7 @@ def get_bank_details_with_id(bank_details_id: int,
     return bank_details
 
 
-@router.get("/client/{client_id}", response_model=List[BankDetailsAPIModel],
+@router.get("/client/{client_id}", response_model=list[BankDetailsAPIModel],
             status_code=status.HTTP_200_OK)
 def get_bank_details_for_client(
         client_id: int, db_instance: Session = Depends(get_db_instance)):

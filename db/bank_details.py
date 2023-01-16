@@ -10,6 +10,14 @@ def return_all_bank_details(db: Session) -> List[BankDetailsAPIModel]:
     return [BankDetailsAPIModel.from_orm(bank) for bank in bank_details]
 
 
+def return_all_bank_details_for_client(
+        db: Session, client_id: int) -> List[BankDetailsAPIModel]:
+    """ Returns all bank details for a specific client. """
+    bank_details = db.query(BankDetailsDBModel).filter(
+        BankDetailsDBModel.client_id == client_id).all()
+    return [BankDetailsAPIModel.from_orm(bank) for bank in bank_details]
+
+
 def return_bank_details_with_specified_id(
         db: Session, bank_id: int) -> Optional[BankDetailsAPIModel]:
     """

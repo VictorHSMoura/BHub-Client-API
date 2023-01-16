@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from apis.clients import router as clients_router
+from apis.bank_details import router as bank_details_router
 from db.sqlalchemy_db import Base, engine
 
 Base.metadata.create_all(bind=engine)
@@ -35,3 +36,4 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 # Adds routes to endpoints.
 app.include_router(clients_router)
+app.include_router(bank_details_router)

@@ -50,6 +50,19 @@ def test_get_bank_details_after_insertion(dbsession: Session, client: None):
     assert bank_details == [default_bank_details_response()]
 
 
+def test_get_bank_details_for_specific_client(dbsession: Session, client: None):
+    create_bank_details(db=dbsession, bank_details=default_bank_details(),
+                        client_id=1)
+
+    bank_details = return_all_bank_details_for_client(
+        db=dbsession, client_id=1)
+    assert bank_details == [default_bank_details_response()]
+
+    bank_details = return_all_bank_details_for_client(
+        db=dbsession, client_id=2)
+    assert bank_details == []
+
+
 def test_get_specific_bank_details(dbsession: Session, client: None):
     create_bank_details(db=dbsession, bank_details=default_bank_details(),
                         client_id=1)

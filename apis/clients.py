@@ -15,7 +15,7 @@ router = APIRouter(
 
 @router.get("/", response_model=List[ClientAPIModel],
             status_code=status.HTTP_200_OK)
-def get_users(db_instance: Session = Depends(get_db_instance)):
+def get_clients(db_instance: Session = Depends(get_db_instance)):
     """ Returns a list with all registered clients. """
     clients = db.return_all_clients(db=db_instance)
     return clients
@@ -23,8 +23,8 @@ def get_users(db_instance: Session = Depends(get_db_instance)):
 
 @router.get("/{client_id}", response_model=ClientAPIModel,
             status_code=status.HTTP_200_OK)
-def get_users_with_id(client_id: int,
-                      db_instance: Session = Depends(get_db_instance)):
+def get_clients_with_id(client_id: int,
+                        db_instance: Session = Depends(get_db_instance)):
     """ Returns a client with the specified id. """
     client = db.return_client_with_specified_id(
         db=db_instance, client_id=client_id)

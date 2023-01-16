@@ -8,6 +8,18 @@ API desenvolvida para a seleção de candidatos da empresa BHub.
 
 ## Execução
 
+### 1. Com Docker
+
+Inicialmente, instale o [Docker](https://docs.docker.com/engine/install/ubuntu/) em seu computador. Após isso, execute no terminal:
+
+```
+  docker compose up
+```
+
+Após isso, a API estará disponível em `localhost:8000`.
+
+### 2. Sem Docker
+
 Antes de executar a API, é necessário conferir se o seu computador possui os requisitos necessários. Após isso, é necessário instalar os pacotes requeridos pelo projeto. Para isso, execute o comando abaixo na pasta raíz do projeto:
 
 ```

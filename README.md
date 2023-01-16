@@ -3,7 +3,7 @@ API desenvolvida para a seleção de candidatos da empresa BHub.
 
 ## Requisitos
 
-- [Python](https://www.python.org/downloads/) (versão utilizada 3.8)
+- [Python](https://www.python.org/downloads/) (versão utilizada 3.10)
 - [Pip](https://pip.pypa.io/en/stable/installation/) (versão utilizada 20.0.2)
 
 ## Execução

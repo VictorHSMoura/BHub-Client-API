@@ -12,6 +12,7 @@ Base = declarative_base()
 """ Creates sqlalchemy session for DB. """
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
+
 def get_db_instance():
     """ Returns a DB instance and closes the DB after finishing using it. """
     db = SessionLocal()

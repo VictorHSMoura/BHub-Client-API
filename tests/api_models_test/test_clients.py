@@ -2,6 +2,7 @@ import pytest
 from apis.models.client import Client
 from datetime import date
 
+
 def test_create_client_without_bank_details():
     """
     Tests the creation of a new client without bank details.
@@ -19,6 +20,7 @@ def test_create_client_without_bank_details():
     assert client.address == "Rua 12, Lagoinha, Belo Horizonte"
     assert client.register_date == date(2020, 9, 28)
     assert client.declared_billing == 15000
+
 
 def test_create_client_with_bank_details():
     """
@@ -48,10 +50,11 @@ def test_create_client_with_bank_details():
     assert client.bank_details[0].account == "27423610"
     assert client.bank_details[0].bank_name == "Caixa Econômica Federal"
 
+
 def test_create_client_with_invalid_phone_number():
     """
     Tests the creation of a new client with a phone number containing invalid
-    characters. 
+    characters.
     """
     with pytest.raises(ValueError):
         """ Phone number contains one non-numeric character. """
@@ -64,10 +67,11 @@ def test_create_client_with_invalid_phone_number():
             bank_details=[]
         )
 
+
 def test_create_client_with_short_phone_number():
     """
     Tests the creation of a new client with a phone number containing less
-    than 8 digits. 
+    than 8 digits.
     """
     with pytest.raises(ValueError):
         """ Phone number contains only 7 digits. """
@@ -79,6 +83,7 @@ def test_create_client_with_short_phone_number():
             declared_billing=15000,
             bank_details=[]
         )
+
 
 def test_create_client_with_invalid_register_date():
     """
@@ -95,6 +100,7 @@ def test_create_client_with_invalid_register_date():
             declared_billing=15000,
             bank_details=[]
         )
+
 
 def test_create_client_with_short_corporate_name():
     """

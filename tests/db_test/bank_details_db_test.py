@@ -2,7 +2,11 @@ import pytest
 from sqlalchemy.orm import Session
 
 from db.clients import create_client
-from db.bank_details import *
+from db.bank_details import (
+    return_all_bank_details, return_all_bank_details_for_client,
+    return_bank_details_with_specified_id, create_bank_details,
+    update_bank_details, delete_bank_details
+)
 from apis.models import ClientAPIModel, BankDetailsAPIModel
 
 
@@ -50,7 +54,8 @@ def test_get_bank_details_after_insertion(dbsession: Session, client: None):
     assert bank_details == [default_bank_details_response()]
 
 
-def test_get_bank_details_for_specific_client(dbsession: Session, client: None):
+def test_get_bank_details_for_specific_client(dbsession: Session,
+                                              client: None):
     create_bank_details(db=dbsession, bank_details=default_bank_details(),
                         client_id=1)
 
@@ -134,7 +139,7 @@ def test_update_id_not_possible(dbsession: Session, client: None):
 
     bank_details = return_bank_details_with_specified_id(db=dbsession,
                                                          bank_id=2)
-    assert bank_details == None
+    assert bank_details is None
 
 
 def test_delete_bank_details(dbsession: Session, client: None):
@@ -142,7 +147,7 @@ def test_delete_bank_details(dbsession: Session, client: None):
                         client_id=1)
 
     is_delete_successful = delete_bank_details(db=dbsession, bank_id=1)
-    assert is_delete_successful == True
+    assert is_delete_successful is True
 
     bank_details = return_bank_details_with_specified_id(db=dbsession,
                                                          bank_id=1)
@@ -154,4 +159,4 @@ def test_delete_bank_details(dbsession: Session, client: None):
 
 def test_delete_unexistent_bank_details(dbsession: Session, client: None):
     is_delete_successful = delete_bank_details(db=dbsession, bank_id=1)
-    assert is_delete_successful == False
+    assert is_delete_successful is False

@@ -12,7 +12,7 @@ def return_all_clients(db: Session) -> list[ClientAPIModel]:
 
 def return_client_with_specified_id(
         db: Session, client_id: int) -> Optional[ClientAPIModel]:
-    """ 
+    """
     Search client with specified id on DB and returns it. If it doesn't
     exist, returns None.
     """
@@ -23,7 +23,7 @@ def return_client_with_specified_id(
 
 def create_client(db: Session,
                   client: ClientAPIModel) -> Optional[ClientAPIModel]:
-    """ 
+    """
     Create client with specified parameters on DB and returns created client.
     """
     # Extract bank details from user.
@@ -43,7 +43,7 @@ def create_client(db: Session,
 
 def update_client(db: Session, client_id: int,
                   client: ClientAPIModel) -> Optional[ClientAPIModel]:
-    """ 
+    """
     Update client parameters on DB and returns new client. If it doesn't
     exist, returns None.
     """
@@ -65,7 +65,7 @@ def update_client(db: Session, client_id: int,
 
 
 def delete_client(db: Session, client_id: int) -> bool:
-    """ 
+    """
     Delete client with specified id from DB and returns if deletion was
     successful. If it doesn't exist, returns False.
     """

@@ -58,8 +58,9 @@ def creates_new_bank_details(bank_details: BankDetailsAPIModel,
 
 @router.put("/{bank_details_id}", response_model=BankDetailsAPIModel,
             status_code=status.HTTP_200_OK)
-def update_bank_details(bank_details_id: int, bank_details: BankDetailsAPIModel,
-                        db_instance: Session = Depends(get_db_instance)):
+def update_bank_details(
+        bank_details_id: int, bank_details: BankDetailsAPIModel,
+        db_instance: Session = Depends(get_db_instance)):
     """ Updates a bank details with specified parameters. """
     bank_details = db.update_bank_details(
         db=db_instance, bank_id=bank_details_id, bank_details=bank_details)

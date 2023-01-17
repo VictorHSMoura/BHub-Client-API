@@ -127,7 +127,8 @@ def test_update_bank_details_with_invalid_parameter(client: TestClient,
     assert response.status_code == 400
 
 
-def test_update_unexistent_bank_details(client: TestClient, default_client: None):
+def test_update_unexistent_bank_details(client: TestClient,
+                                        default_client: None):
     response = client.put("/bank_details/1", json=default_bank_details())
 
     assert response.status_code == 404

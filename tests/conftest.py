@@ -13,7 +13,6 @@ from db.sqlalchemy_db import Base, get_db_instance
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from typing import Generator
 from app import app
 
 DATABASE_PATH = "sqlite:///test_database.db"

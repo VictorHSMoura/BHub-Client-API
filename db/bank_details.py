@@ -32,7 +32,7 @@ def return_bank_details_with_specified_id(
 
 def create_bank_details(db: Session, bank_details: BankDetailsAPIModel,
                         client_id: int) -> Optional[BankDetailsAPIModel]:
-    """ 
+    """
     Create bank details with specified parameters on DB and returns created
     bank details.
     """
@@ -56,7 +56,7 @@ def create_bank_details(db: Session, bank_details: BankDetailsAPIModel,
 def update_bank_details(
         db: Session, bank_id: int,
         bank_details: BankDetailsAPIModel) -> Optional[BankDetailsAPIModel]:
-    """ 
+    """
     Update bank details parameters on DB and returns new bank details. If it
     doesn't exist, returns None.
     """
@@ -76,7 +76,7 @@ def update_bank_details(
 
 
 def delete_bank_details(db: Session, bank_id: int) -> bool:
-    """ 
+    """
     Delete bank details with specified id from DB and returns if deletion was
     successful. If it doesn't exist, returns False.
     """

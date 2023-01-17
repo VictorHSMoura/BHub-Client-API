@@ -1,6 +1,5 @@
 import pytest
 from apis.models.bank_details import BankDetails
-from datetime import date
 
 
 def test_create_bank():
@@ -21,7 +20,7 @@ def test_create_bank():
 def test_create_bank_with_invalid_branch_number():
     """
     Tests the creation of a new bank with a branch number containing invalid
-    characters. 
+    characters.
     """
     with pytest.raises(ValueError):
         """ Branch number contains one non-numeric character. """
@@ -34,7 +33,7 @@ def test_create_bank_with_invalid_branch_number():
 
 def test_create_bank_without_branch_number():
     """
-    Tests the creation of a new bank without a branch number. 
+    Tests the creation of a new bank without a branch number.
     """
     with pytest.raises(ValueError):
         """ Branch number not set. """
@@ -47,7 +46,7 @@ def test_create_bank_without_branch_number():
 def test_create_bank_with_invalid_account_number():
     """
     Tests the creation of a new bank with an account number containing invalid
-    characters. 
+    characters.
     """
     with pytest.raises(ValueError):
         """ Account number contains one non-numeric character. """
@@ -60,7 +59,7 @@ def test_create_bank_with_invalid_account_number():
 
 def test_create_bank_without_account_number():
     """
-    Tests the creation of a new bank without an account number. 
+    Tests the creation of a new bank without an account number.
     """
     with pytest.raises(ValueError):
         """ Account number not set. """

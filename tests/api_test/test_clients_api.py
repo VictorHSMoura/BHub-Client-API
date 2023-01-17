@@ -83,7 +83,7 @@ def test_update_client(client: TestClient):
 
     updated_client = default_client()
     updated_client["declared_billing"] = 20000.00
-    
+
     response = client.put("/clients/1", json=updated_client)
     assert response.status_code == 200
 
@@ -101,29 +101,32 @@ def test_update_client_with_invalid_parameter(client: TestClient):
 
     updated_client = default_client()
     updated_client["register_date"] = "/09/2020"
-    
+
     response = client.put("/clients/1", json=updated_client)
 
     assert response.status_code == 400
 
-def test_update_unexistent_client(client: TestClient):   
+
+def test_update_unexistent_client(client: TestClient):
     response = client.put("/clients/1", json=default_client())
 
     assert response.status_code == 404
     assert response.json() == {"detail": "Client not found."}
+
 
 def test_update_id_not_possible(client: TestClient):
     client.post("/clients", json=default_client())
 
     updated_client = default_client()
     updated_client["id"] = 2
-    
+
     client.put("/clients/1", json=updated_client)
 
     response = client.get("/clients/1")
 
     assert response.status_code == 200
     assert response.json() == default_response()
+
 
 def test_delete_client(client: TestClient):
     client.post("/clients", json=default_client())

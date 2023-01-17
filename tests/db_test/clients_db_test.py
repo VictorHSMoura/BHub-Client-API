@@ -1,6 +1,9 @@
 from sqlalchemy.orm import Session
 
-from db.clients import *
+from db.clients import (
+    return_all_clients, return_client_with_specified_id,
+    create_client, update_client, delete_client
+)
 from apis.models import ClientAPIModel, BankDetailsAPIModel
 
 
@@ -99,14 +102,14 @@ def test_update_id_not_possible(dbsession: Session):
     assert client == default_response()
 
     client = return_client_with_specified_id(db=dbsession, client_id=2)
-    assert client == None
+    assert client is None
 
 
 def test_delete_client(dbsession: Session):
     create_client(db=dbsession, client=default_client())
 
     is_delete_successful = delete_client(db=dbsession, client_id=1)
-    assert is_delete_successful == True
+    assert is_delete_successful is True
 
     client = return_client_with_specified_id(db=dbsession, client_id=1)
     assert client is None
@@ -117,4 +120,4 @@ def test_delete_client(dbsession: Session):
 
 def test_delete_unexistent_client(dbsession: Session):
     is_delete_successful = delete_client(db=dbsession, client_id=1)
-    assert is_delete_successful == False
+    assert is_delete_successful is False

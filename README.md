@@ -43,3 +43,6 @@ Os testes dessa aplicação foram feitos utilizando a biblioteca pytest. Para ex
 ```
   pytest
 ```
+## Deploy
+
+A API também está disponível na seguinte URL: https://bhub-api-victor-moura.herokuapp.com

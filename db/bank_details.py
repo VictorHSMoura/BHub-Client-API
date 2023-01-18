@@ -44,8 +44,10 @@ def create_bank_details(db: Session, bank_details: BankDetailsAPIModel,
         return None
 
     # Convert bank details from Pydantic to ORM.
+    bank = bank_details.dict()
+    bank.pop("id")
     db_bank_details = BankDetailsDBModel(
-        **bank_details.dict(), client_id=client_id)
+        **bank, client_id=client_id)
 
     # Add bank details to database and return created model.
     db.add(db_bank_details)

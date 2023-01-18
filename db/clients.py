@@ -33,6 +33,7 @@ def create_client(db: Session,
     # Create DB model for client.
     client_data = client.dict()
     client_data.pop("bank_details")
+    client_data.pop("id")
     db_client = ClientDBModel(**client_data, bank_details=db_bank_details)
 
     # Add client to database and return created model.

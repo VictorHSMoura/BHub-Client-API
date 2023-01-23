@@ -46,3 +46,5 @@ Os testes dessa aplicação foram feitos utilizando a biblioteca pytest. Para ex
 ## Deploy
 
 A API também está disponível na seguinte URL: https://bhub-api-victor-moura.herokuapp.com
+
+**OBS.:** Deploy não ativo no momento devido à [remoção do plano gratuito](https://blog.heroku.com/next-chapter) de dynos do Heroku.
